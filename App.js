@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
-import { evaluate } from 'mathjs'; // Import mathjs library
+import { evaluate } from 'mathjs';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -25,8 +25,6 @@ export default function App() {
     try {
       if (text) {
         let expression = text;
-
-        // Xử lý các hàm lượng giác và phần trăm
         expression = expression.replace(
           /Sin\((.*?)\)/g,
           (_, num) => `sin(${num} * pi / 180)`,
@@ -45,7 +43,6 @@ export default function App() {
         );
         expression = expression.replace(/(\d+(\.\d+)?)%/g, '($1 / 100)');
 
-        // Tính toán biểu thức
         const result = evaluate(expression);
         setText(String(result));
       } else {
